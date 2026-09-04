@@ -1,28 +1,33 @@
+#ifndef CREATURES_H
+#define CREATURES_H
+
 #include <SDL2/SDL.h>
+#include "entities/entities.h"
+#include <random>
 
-class Object {
-protected:
-    int posX, posY;
-    bool track;
-
-public:
-    Object() : posX(0), posY(0), track(false) {}
-    Object(int x, int y) : posX(x), posY(y) {}
-};
-
-
-class Character : public Object {
-protected:
-    int health;
-
-public:
-    Character(int x, int y, int h) : Object(x, y), health(h) { track = true; }
-};
-
+short int sign(short int x) {
+    if (!x) return 0;
+    return x > 0 ? 1 : -1;
+}
 
 class Enemy : public Object {
+protected:
     int health;
-    
+
 public:
-    Enemy(int x, int y, int h) : Object(x, y), health(h) {}
+    void moveTo(int x, int y) {
+        int xMove = sign(x - this->x);
+        int yMove = sign(y - this->y);
+        double norm = sqrt(xMove * xMove + yMove * yMove);
+
+        if (norm <= speed) {
+            this->x = x;
+            this->y = y;
+        } else {
+            rand() % xMove // дописать функцию
+        }
+        
+    }
 };
+
+#endif //CREATURES_H

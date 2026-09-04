@@ -4,5 +4,5 @@ cc_binary (
     name = "app",
     srcs = ["app.cpp"],
     linkopts = ["-lSDL2"],
-    deps = ["//creatures:creatures"],
+    deps = ["//entities:entities"],
 )
